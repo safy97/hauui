@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_21_115458) do
+ActiveRecord::Schema.define(version: 2019_07_21_150741) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2019_07_21_115458) do
   create_table "devices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.string "uuid"
-    t.boolean "logged_in"
+    t.boolean "logged_in", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_devices_on_user_id"
@@ -118,7 +118,7 @@ ActiveRecord::Schema.define(version: 2019_07_21_115458) do
     t.string "title"
     t.string "confirm_code"
     t.string "password_digest"
-    t.boolean "confirmed"
+    t.boolean "confirmed", default: false
     t.string "reset_token"
     t.string "email"
     t.string "phone"

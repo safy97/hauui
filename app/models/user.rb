@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
 
 	#associations
-
+	has_many :devices, :dependent => :destroy
 
 
 	#validations
@@ -15,8 +15,13 @@ class User < ApplicationRecord
                       :uniqueness => {case_sensitive: false},
                       :allow_nil => true
 
-    validates :phone, :length => {:in => 7..11} , :uniqueness => {scope: :country_code } ,allow_nil: true  #apply unique validation on {phone, country_code}
-    validates :country_code , :length => {:in => 2..5} ,allow_nil: true
+    validates :phone, :length => {:in => 7..11} ,
+    				  :uniqueness => {scope: :country_code } ,
+    				   allow_nil: true  #apply unique validation on {phone, country_code}
+    validates :country_code , :length => {:in => 2..5} ,
+    						   allow_nil: true,
+    						   numericality: true
+    validate :presence_uncompleted_phone
 
 
     validate :presence_phone_or_email #at least phone number or email must be presence
@@ -48,6 +53,11 @@ class User < ApplicationRecord
     def presence_uncompleted_location
     	if (!! long ^ !! lat)
     		errors.add(:base, "location if present must have both  longitude and latitude ")
+    	end
+    end	
+    def presence_uncompleted_phone
+    	if (!! phone ^ !! country_code )
+    		errors.add(:base, "phone number if present must have both  country code and phone value")
     	end
     end			      	        
 end
