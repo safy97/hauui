@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_21_150741) do
+ActiveRecord::Schema.define(version: 2019_07_21_160637) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(version: 2019_07_21_150741) do
   end
 
   create_table "hoppies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.bigint "hoppy_parent"
+    t.bigint "hoppy_parent_id"
     t.string "name"
-    t.index ["hoppy_parent"], name: "index_hoppies_on_hoppy_parent"
+    t.index ["hoppy_parent_id"], name: "index_hoppies_on_hoppy_parent_id"
   end
 
   create_table "levels", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 2019_07_21_150741) do
     t.decimal "lat", precision: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "birthdate"
     t.index ["country_code", "phone"], name: "index_users_on_country_code_and_phone", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
   end
