@@ -1,6 +1,6 @@
 class Level < ApplicationRecord
 	#association
-	#has_many :posts #option to be added
+	has_many :posts 
  
 	#validation
 	validates :name , presence: true ,

@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
 	#associations
 	has_many :devices, :dependent => :destroy
-
+  has_many :posts
 
 	#validations
 
