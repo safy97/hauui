@@ -7,7 +7,7 @@ class Review < ApplicationRecord
 	#validations
 	validates :rate, numericality: {less_than_or_equal_to: 10.0}
 	validates :reviewer , :uniqueness => {scope: :reviewee ,message: "you can add review at most once"}
-
+	validate :not_review_myself
 	#callbacks
 	before_create :add_the_rate
 	before_destroy :remove_the_rate
@@ -52,5 +52,9 @@ class Review < ApplicationRecord
 		rate = reviewee.rate
 		rate = rate  + ((self.rate)/(count))
 		reviewee.update(rate: rate)
+	end
+
+	def not_review_myself
+		errors.add(:base, "you can't review yourself") if reviewer.id == reviewee.id
 	end
 end
