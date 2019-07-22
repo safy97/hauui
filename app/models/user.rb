@@ -8,6 +8,10 @@ class User < ApplicationRecord
   has_many :posts , :dependent => :destroy
   has_many :user_hoppies , :dependent => :destroy
 
+  has_many :reviewed_relationships , class_name: "Review" ,foreign_key: "reviewee_id", dependent:   :destroy
+  has_many :reviewers ,through: :reviewed_relationships
+
+  has_many :reviewing_relationships , class_name: "Review" ,foreign_key: "reviewer_id", dependent:   :destroy #i do this to delete all reviews made by the destroyed user 
 
 	#validations
 
