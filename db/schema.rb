@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_22_131102) do
+ActiveRecord::Schema.define(version: 2019_07_22_132900) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(version: 2019_07_22_131102) do
     t.string "followed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_friendship_relations_on_followed_id"
+    t.index ["follower_id"], name: "index_friendship_relations_on_follower_id"
   end
 
   create_table "hoppies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|

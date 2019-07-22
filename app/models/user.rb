@@ -13,6 +13,12 @@ class User < ApplicationRecord
 
   has_many :reviewing_relationships , class_name: "Review" ,foreign_key: "reviewer_id", dependent:   :destroy #i do this to delete all reviews made by the destroyed user 
 
+  has_many :followed_relationships , class_name: "FriendshipRelation" , foreign_key: "followed_id" , dependent: :destroy
+  has_many :followers , through: :followed_relationships
+
+  has_many :following_relationships , class_name: "FriendshipRelation" , foreign_key: "follower_id" , dependent: :destroy
+  has_many :following , through: :following_relationships , source: :followed
+  
 	#validations
 
 	EMAIL_REGEX = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\Z/i
